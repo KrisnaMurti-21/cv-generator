@@ -7,10 +7,17 @@ document.getElementById("cvForm").addEventListener("submit", function (event) {
     this.reportValidity(); // Tampilkan pesan validasi
   }
 });
+//Ubah Tanggal menjadi Format: Jan, 2024
+function formatDate(dateString) {
+  if (!dateString) return ""; // Jika kosong, langsung return string kosong
+  let date = new Date(dateString);
+  if (isNaN(date)) return ""; // Jika tanggal tidak valid, return kosong
+  return date.toLocaleString("en-US", { month: "short", year: "numeric" }); // Format: Jan, 2024
+}
 // Fungsi untuk menambahkan pengalaman kerja baru
 function addWorkExperience() {
-  const container = document.getElementById("work-experience-container");
-  const entry = document.createElement("div");
+  let container = document.getElementById("work-experience-container");
+  let entry = document.createElement("div");
   entry.className = "entry work-experience-entry";
   entry.innerHTML = `
   <div class="border bg-body-secondary bg-opacity-10 p-3 mt-3 rounded">
@@ -23,6 +30,16 @@ function addWorkExperience() {
             <div class="mb-3">
               <label class="form-label">Jabatan:</label>
               <input class="form-control" type="text" name="jobTitle" placeholder="Jabatan" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Lokasi:</label>
+              <input
+                class="form-control"
+                type="text"
+                name="jobLocation"
+                placeholder="Lokasi"
+              />
+              <div class="form-text">Tuliskan alamat lokasi kerja anda, misalnya: Jakarta, Indonesia</div>
             </div>
           </div>
           <div class="col-sm-12 col-md-6">
@@ -55,8 +72,8 @@ function addWorkExperience() {
   container.appendChild(entry);
 
   // Tambahkan event listener ke checkbox baru
-  const checkBox = entry.querySelector(".still-working-checkbox");
-  const endDateInput = entry.querySelector(".end-date");
+  let checkBox = entry.querySelector(".still-working-checkbox");
+  let endDateInput = entry.querySelector(".end-date");
 
   checkBox.addEventListener("change", function () {
     if (this.checked) {
@@ -91,10 +108,56 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Ambil data Work Experience
+function getWorkExperiences() {
+  let workExpList = [];
+  let jobDescriptionList = [];
+  let workExpEntries = document.querySelectorAll(".work-experience-entry");
+
+  workExpEntries.forEach((entry) => {
+    let company = entry.querySelector("input[name='company']")?.value || "";
+    let jobTitle = entry.querySelector("input[name='jobTitle']")?.value || "";
+    let jobLocation =
+      entry.querySelector("input[name='jobLocation']")?.value || "";
+    let startDate = entry.querySelector("input[name='startDate']")?.value || "";
+    let endDateInput = entry.querySelector("input[name='endDate']");
+    let stillWorkingHere = entry.querySelector(
+      "input[name='stillWorkingHere']"
+    ).checked;
+
+    let formattedStartDate = formatDate(startDate);
+    let formattedEndDate = stillWorkingHere
+      ? "Sekarang"
+      : formatDate(endDateInput?.value || "");
+    let jobDescription =
+      entry.querySelector("textarea[name='jobDescription']")?.value || "";
+
+    jobDescriptionList = jobDescription.split("\n");
+    if (
+      company ||
+      jobTitle ||
+      jobLocation ||
+      formattedStartDate ||
+      formattedEndDate ||
+      jobDescription
+    ) {
+      workExpList.push({
+        company,
+        jobTitle,
+        jobLocation,
+        jobDate: `${formattedStartDate} - ${formattedEndDate}`,
+        jobDescriptionList,
+      });
+    }
+  });
+
+  return workExpList;
+}
+
 // Fungsi menambahkan Education entry
 function addEducation() {
-  const container = document.getElementById("education-container");
-  const entry = document.createElement("div");
+  let container = document.getElementById("education-container");
+  let entry = document.createElement("div");
   entry.className = "entry education-entry";
   entry.innerHTML = `
     <div class="border bg-body-secondary bg-opacity-10 p-3 mt-3 rounded">
@@ -189,8 +252,8 @@ function getEducationData() {
 
 // Fungsi menambahkan Achievement entry
 function addAchievement() {
-  const container = document.getElementById("achievement-container");
-  const entry = document.createElement("div");
+  let container = document.getElementById("achievement-container");
+  let entry = document.createElement("div");
   entry.className = "entry achievement-entry";
   entry.innerHTML = `
     <div class="border bg-body-secondary bg-opacity-10 p-3 mt-3 rounded">
@@ -222,8 +285,8 @@ function addAchievement() {
 
 // Fungsi menambahkan Certificate entry
 function addCertificate() {
-  const container = document.getElementById("certificate-container");
-  const entry = document.createElement("div");
+  let container = document.getElementById("certificate-container");
+  let entry = document.createElement("div");
   entry.className = "entry certificate-entry";
   entry.innerHTML = `
     <div class="border bg-body-secondary bg-opacity-10 p-3 mt-3 rounded">
@@ -280,38 +343,6 @@ function addCertificate() {
       </div>
   `;
   container.appendChild(entry);
-}
-
-// Ambil data Work Experience
-function getWorkExperiences() {
-  let workExpList = [];
-  let workExpEntries = document.querySelectorAll(".work-experience-entry");
-
-  workExpEntries.forEach((entry) => {
-    let company = entry.querySelector("input[name='company']")?.value || "";
-    let jobTitle = entry.querySelector("input[name='jobTitle']")?.value || "";
-    let startDate = entry.querySelector("input[name='startDate']")?.value || "";
-    let endDateInput = entry.querySelector("input[name='endDate']");
-    let stillWorkingHere = entry.querySelector(
-      "input[name='stillWorkingHere']"
-    ).checked;
-
-    let endDate = stillWorkingHere ? "Sekarang" : endDateInput?.value || ""; // Atur ke "Sekarang" jika dicentang
-
-    let jobDescription =
-      entry.querySelector("textarea[name='jobDescription']")?.value || "";
-
-    if (company || jobTitle || startDate || endDate || jobDescription) {
-      workExpList.push({
-        company,
-        jobTitle,
-        jobDate: `${startDate} - ${endDate}`,
-        jobDescription,
-      });
-    }
-  });
-
-  return workExpList;
 }
 
 // Fungsi untuk mengenerate PDF dari data form
@@ -420,9 +451,9 @@ function generatePDF() {
   doc.text(contactLines, doc.internal.pageSize.width / 2, y, {
     align: "center",
   });
-  y += contactLines.length * 6;
+  y += contactLines.length * 5;
   doc.line(10, y, 200, y);
-  y += 10;
+  y += 5;
 
   // Tampilkan bagian "Summary"
   doc.setFont("helvetica", "normal");
@@ -442,26 +473,31 @@ function generatePDF() {
   workExpList.forEach((item, index) => {
     // Tampilkan Nama Perusahaan (Tebal) di kiri
     doc.setFont("helvetica", "bold");
-    doc.text(item.company, 10, y);
+    doc.text(`${item.company} | ${item.jobTitle}`, 10, y);
     y += 5;
     //Tampilkan Jabatan (Normal) di kiri
     doc.setFont("helvetica", "italic");
-    doc.text(item.jobTitle, 10, y);
+    doc.text(item.jobLocation, 10, y);
 
-    // Tampilkan Periode (Miring) di kanan
-    doc.setFont("helvetica", "normal");
+    // Tampilkan Periode di kanan
+    doc.setFont("helvetica", "bold");
     let textWidth = doc.getTextWidth(item.jobDate);
-    const pageWidth = doc.internal.pageSize.width;
+    let pageWidth = doc.internal.pageSize.width;
     doc.text(item.jobDate, pageWidth - textWidth - 10, y);
 
     // Tampilkan Deskripsi (Normal) di bawahnya
     y += 6;
     doc.setFont("helvetica", "normal");
-    let splitDesc = doc.splitTextToSize(`${item.jobDescription}`, 180);
-    doc.text(splitDesc, 10, y);
 
-    // Tambahkan jarak antar entri
-    y += splitDesc.length * 6;
+    item.jobDescriptionList.forEach((desc) => {
+      let splitDesc = doc.splitTextToSize(desc, 175);
+      doc.setFont("Zapfdingbats", "normal");
+      doc.text("\x6c", 12, y);
+      doc.setFont("helvetica", "normal");
+      doc.text(splitDesc, 17, y, { align: "justify", maxWidth: "175" });
+      y += splitDesc.length * 5;
+    });
+    y += 3;
   });
 
   // Tampilkan bagian "Education"
@@ -474,10 +510,10 @@ function generatePDF() {
     doc.setFont("helvetica", "bold");
     doc.text(item.institution, 10, y);
 
-    // Tampilkan Periode (Miring) di kanan
-    doc.setFont("helvetica", "italic");
+    // Tampilkan Periode di kanan
+    doc.setFont("helvetica", "bold");
     let textWidth = doc.getTextWidth(item.educationDate);
-    const pageWidth = doc.internal.pageSize.width;
+    let pageWidth = doc.internal.pageSize.width;
     doc.text(item.educationDate, pageWidth - textWidth - 10, y);
 
     // Tampilkan Deskripsi (Normal) di bawahnya
@@ -486,15 +522,42 @@ function generatePDF() {
     let majorDegree = `${item.degree}, ${item.major}`;
     doc.text(majorDegree, 10, y);
     y += 4;
-    doc.text(item.gpa, 10, y);
+    doc.text(`GPA : ${item.gpa}/4`, 10, y);
 
     // Tambahkan jarak antar entri
-    y += 10;
+    y += 5;
   });
-  addSection("Hard Skills", hardSkills);
-  addSection("Soft Skills", softSkills);
-  addSection("Languages", languages);
-  addSection("Achievement", achievementText, true);
+  // Tampilkan bagian "Skill"
+  doc.setFont("helvetica", "bold");
+  doc.text("SKILL", 10, y);
+  y += 3;
+  doc.line(10, y, 200, y);
+  y += 5;
+  doc.setFont("helvetica", "normal");
+  doc.text("Hard Skills", 10, y);
+  let hardSkillWidth = doc.getTextWidth("Hard Skills: ");
+  let splitHardSkills = doc.splitTextToSize(hardSkills, 175);
+  doc.text(":", 10 + hardSkillWidth, y);
+  splitHardSkills.forEach((item, index) => {
+    doc.text(item, 12 + hardSkillWidth, y, { align: "justify", maxWidth: 175 });
+    y += 5;
+  });
+
+  doc.text("Soft Skills", 10, y);
+  doc.text(":", 10 + hardSkillWidth, y);
+  let splitSoftSkills = doc.splitTextToSize(softSkills, 175);
+  splitSoftSkills.forEach((item, index) => {
+    doc.text(item, 12 + hardSkillWidth, y, { align: "justify", maxWidth: 175 });
+    y += 5;
+  });
+  doc.text("Language", 10, y);
+  doc.text(":", 10 + hardSkillWidth, y);
+  let splitLanguages = doc.splitTextToSize(languages, 175);
+  splitLanguages.forEach((item, index) => {
+    doc.text(item, 12 + hardSkillWidth, y, { align: "justify", maxWidth: 175 });
+    y += 5;
+  });
+  y += 5;
   //Tampilkan Achievement
   if (achievementList.length != 0) {
     doc.setFont("helvetica", "bold");

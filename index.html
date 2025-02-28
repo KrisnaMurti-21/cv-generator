@@ -165,6 +165,16 @@
                             placeholder="Jabatan"
                           />
                         </div>
+                        <div class="mb-3">
+                          <label class="form-label">Lokasi:</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="jobLocation"
+                            placeholder="Lokasi"
+                          />
+                          <div class="form-text">Tuliskan alamat lokasi kerja anda, misalnya: Jakarta, Indonesia</div>
+                        </div>
                       </div>
                       <div class="col-sm-12 col-md-6">
                         <div class="mb-3">
@@ -374,7 +384,8 @@
                     Tambah Achievement</button
                   ><br />
                 </div>
-            ~  </div>
+                ~
+              </div>
               <!-- Sertifikasi -->
               <div class="col-sm-12 border-bottom pb-2 mb-3">
                 <div class="mb-3">
@@ -394,7 +405,7 @@
             <button
               type="button"
               class="btn btn-primary"
-              onclick="document.getElementById('cvForm').dispatchEvent(new Event('submit'));"
+              onclick="generatePDF()"
             >
               Generate CV
             </button>
