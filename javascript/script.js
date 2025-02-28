@@ -233,6 +233,10 @@ function getEducationData() {
     let stillStudying = entry.querySelector(
       "input[name='stillStudying']"
     ).checked;
+    let formattedStartDateEdu = formatDate(startDate);
+    let formattedEndDateEdu = stillStudying
+      ? "Sekarang"
+      : formatDate(endDateInput?.value || "");
 
     let endDate = stillStudying ? "Sekarang" : endDateInput?.value || ""; // Atur ke "Sekarang" jika dicentang
 
@@ -242,7 +246,7 @@ function getEducationData() {
         major,
         degree,
         gpa,
-        educationDate: `${startDate} - ${endDate}`,
+        educationDate: `${formattedStartDateEdu} - ${formattedEndDateEdu}`,
       });
     }
   });
@@ -393,7 +397,6 @@ function generatePDF() {
   let educationList = getEducationData();
 
   // Ambil data Achievement
-  let achievementText = "";
   let achievementList = [];
   let achievementEntries = document.querySelectorAll(".achievement-entry");
 
