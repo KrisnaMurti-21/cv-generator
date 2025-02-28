@@ -173,7 +173,10 @@
                             name="jobLocation"
                             placeholder="Lokasi"
                           />
-                          <div class="form-text">Tuliskan alamat lokasi kerja anda, misalnya: Jakarta, Indonesia</div>
+                          <div class="form-text">
+                            Tuliskan alamat lokasi kerja anda, misalnya:
+                            Jakarta, Indonesia
+                          </div>
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-6">
@@ -405,7 +408,7 @@
             <button
               type="button"
               class="btn btn-primary"
-              onclick="generatePDF()"
+              onclick="document.getElementById('cvForm').dispatchEvent(new Event('submit'));"
             >
               Generate CV
             </button>
