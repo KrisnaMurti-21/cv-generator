@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATS CV Generator</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      href="/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div id="hero">
+      <div class="container my-5">
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3">
+          <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis">
+              CV ATS Generator
+            </h1>
+            <p class="lead">
+              CV ATS-friendly bisa meningkatkan peluang Anda lolos seleksi
+              kerja! Yuk, buat CV yang rapi, profesional, dan mudah dibaca oleh
+              sistem ATS agar lebih cepat menarik perhatian recruiter. Jangan
+              biarkan CV biasa menghambat karier Anda!
+            </p>
+            <div
+              class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3"
+            >
+              <a href="#form-data">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg px-4 me-md-2 fw-bold"
+                >
+                  Mulai
+                </button>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+            <img
+              class="rounded-lg-3 rounded"
+              src="application-1756260_1280.png"
+              alt=""
+              width="720"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="form-data">
+      <div class="container px-4 py-5" id="hanging-icons">
+        <h2 class="pb-2 border-bottom text-center">
+          Isi Data Untuk Membuat CV
+        </h2>
+        <div class="row py-5">
+          <form id="cvForm" class="p-3 p-lg-5 pt-lg-3">
+            <div class="row">
+              <!-- Informasi Pribadi -->
+              <div class="col-sm-12 border-bottom pb-2 mb-3">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="mb-3">
+                      <label class="form-label" for="name">Nama:</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        id="name"
+                        placeholder="Masukkan nama"
+                        required
+                      />
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label" for="email">Email:</label>
+                      <input
+                        class="form-control"
+                        type="email"
+                        id="email"
+                        placeholder="Masukkan email"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div class="mb-3">
+                      <label class="form-label" for="phone"
+                        >Mobile Number:</label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        id="phone"
+                        placeholder="Masukkan nomor telepon"
+                        required
+                      />
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label" for="linkedin"
+                        >LinkedIn (Opsional):</label
+                      >
+                      <input
+                        class="form-control"
+                        type="text"
+                        id="linkedin"
+                        placeholder="LinkedIn (opsional)"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="location">Location:</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="location"
+                    placeholder="Masukkan lokasi"
+                  />
+                </div>
+              </div>
+              <!-- Tentang Diri  -->
+              <div class="col-sm-12 border-bottom pb-2 mb-3">
+                <div class="mb-3">
+                  <label class="form-label" for="summary">Summary:</label>
+                  <textarea
+                    class="form-control"
+                    id="summary"
+                    placeholder="Ringkasan tentang diri Anda"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+              </div>
+              <!-- Pengalaman Kerja -->
+              <div class="col-sm-12 border-bottom pb-3 mb-3">
+                <label>Pengalaman Kerja</label>
+                <div class="my-3" id="work-experience-container">
+                  <!-- Elemen default pertama -->
+                  <div
+                    class="entry work-experience-entry border bg-body-secondary bg-opacity-10 p-3 mt-3 rounded"
+                  >
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6">
+                        <div class="mb-3">
+                          <label class="form-label">Nama Perusahaan:</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="company"
+                            placeholder="Nama Perusahaan"
+                          />
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Jabatan:</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="jobTitle"
+                            placeholder="Jabatan"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <div class="mb-3">
+                          <label class="form-label">Bulan & Tahun Mulai:</label>
+                          <input
+                            class="form-control"
+                            type="month"
+                            name="startDate"
+                          />
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label"
+                            >Bulan & Tahun Selesai:</label
+                          >
+                          <input
+                            class="form-control end-date"
+                            type="month"
+                            name="endDate"
+                            id="endDate"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label">Deskripsi Kerjaan:</label><br />
+                      <textarea
+                        class="form-control"
+                        name="jobDescription"
+                        rows="3"
+                        placeholder="Deskripsi Kerjaan"
+                      ></textarea>
+                    </div>
+
+                    <!-- Checkbox untuk "Masih bekerja di sini" -->
+                    <div class="mb-3 form-check form-switch">
+                      <input
+                        class="form-check-input still-working-checkbox"
+                        type="checkbox"
+                        name="stillWorkingHere"
+                        id="flexSwitchCheck"
+                      />
+                      <label class="form-check-label" for="flexSwitchCheck"
+                        >Masih bekerja di sini</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tombol Tambah -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-3"
+                  onclick="addWorkExperience()"
+                >
+                  Tambah Pengalaman
+                </button>
+              </div>
+
+              <!-- Pendidikan -->
+              <div class="col-sm-12 border-bottom pb-3 mb-3">
+                <div class="mb-3">
+                  <label class="form-label">Education:</label>
+                  <div class="my-3" id="education-container">
+                    <!-- Elemen default pertama -->
+                    <div
+                      class="entry education-entry border bg-body-secondary bg-opacity-10 p-3 mt-3 rounded"
+                    >
+                      <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label"
+                              >Nama Instansi Pendidikan:</label
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              name="institution"
+                              placeholder="Nama Instansi"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">Jurusan:</label>
+                            <input
+                              class="form-control"
+                              type="text"
+                              name="major"
+                              placeholder="Jurusan"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">Degree:</label>
+                            <input
+                              class="form-control"
+                              type="text"
+                              name="degree"
+                              placeholder="Degree"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label">GPA Score:</label>
+                            <input
+                              class="form-control"
+                              type="number"
+                              name="gpa"
+                              placeholder="GPA"
+                              step="0.01"
+                              min="0"
+                              max="4"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label"
+                              >Bulan & Tahun Mulai:</label
+                            >
+                            <input
+                              class="form-control"
+                              type="month"
+                              name="startDate"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label"
+                              >Bulan & Tahun Selesai:</label
+                            >
+                            <input
+                              class="form-control end-date"
+                              type="month"
+                              name="endDate"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-3 form-check form-switch">
+                        <input
+                          class="form-check-input still-studying-checkbox"
+                          type="checkbox"
+                          name="stillStudying"
+                          role="switch"
+                        />
+                        <label class="form-check-label">Masih Bersekolah</label>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    onclick="addEducation()"
+                  >
+                    Tambah Education
+                  </button>
+                </div>
+              </div>
+
+              <!-- Hard Skills -->
+              <div class="col-sm-12 border-bottom pb-2 mb-3">
+                <div class="mb-3">
+                  <label class="form-label" for="hardSkills"
+                    >Hard Skills:</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="hardSkills"
+                    required
+                  ></textarea>
+                  <div class="form-text">Pisahkan dengan koma (,)</div>
+                </div>
+              </div>
+              <!-- Soft Skills -->
+              <div class="col-sm-12 border-bottom pb-2 mb-3">
+                <div class="mb-3">
+                  <label class="form-label" for="softSkills"
+                    >Soft Skills:</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="softSkills"
+                    required
+                  ></textarea>
+                  <div class="form-text">Pisahkan dengan koma (,)</div>
+                </div>
+              </div>
+              <!-- Bahasa -->
+              <div class="col-sm-12 border-bottom pb-2 mb-3">
+                <div class="mb-3">
+                  <label class="form-label" for="languages">Languages:</label>
+                  <textarea
+                    class="form-control"
+                    id="languages"
+                    required
+                  ></textarea>
+                  <div class="form-text">Pisahkan dengan koma (,)</div>
+                </div>
+              </div>
+              <!-- Penghargaan -->
+              <div class="col-sm-12 border-bottom pb-2 mb-3">
+                <div class="mb-3">
+                  <label class="form-label">Achievement (Opsional):</label>
+                  <div class="my-3" id="achievement-container"></div>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    onclick="addAchievement()"
+                  >
+                    Tambah Achievement</button
+                  ><br />
+                </div>
+            ~  </div>
+              <!-- Sertifikasi -->
+              <div class="col-sm-12 border-bottom pb-2 mb-3">
+                <div class="mb-3">
+                  <label class="form-label">Certificate (Opsional):</label>
+                  <div class="my-3" id="certificate-container"></div>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    onclick="addCertificate()"
+                  >
+                    Tambah Certificate</button
+                  ><br /><br />
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="document.getElementById('cvForm').dispatchEvent(new Event('submit'));"
+            >
+              Generate CV
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <footer class="py-3 my-4">
+        <div class="border-bottom mb-5"></div>
+        <p class="text-center text-body-secondary">&copy; 2024 Company, Inc</p>
+      </footer>
+    </div>
+    <script
+      src="/javascript/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/javascript/jspdf.umd.min.js"></script>
+    <script src="/javascript/script.js"></script>
+  </body>
+</html>
