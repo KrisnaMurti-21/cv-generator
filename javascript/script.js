@@ -524,10 +524,10 @@ function generatePDF() {
   });
 
   // Log data URI PDF di console
-  let pdfDataUri = doc.output("datauristring");
-  console.log("Hasil PDF dalam data URI:", pdfDataUri);
+  // let pdfDataUri = doc.output("datauristring");
+  // console.log("Hasil PDF dalam data URI:", pdfDataUri);
 
   // Simpan PDF
-  // doc.save("Hasil_Generate.pdf");
-  // console.log("PDF berhasil dibuat dan diunduh.");
+  doc.save("Hasil_Generate.pdf");
+  console.log("PDF berhasil dibuat dan diunduh.");
 }
